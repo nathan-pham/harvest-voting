@@ -1,8 +1,18 @@
 import Root from "components/Root"
+import Navigation from "components/Navigation"
+
+const Wrapper = ({ children }) => (
+    <div className="flex">
+        { children }
+    </div>
+)
 
 const Home = () => (
     <Root>
-        <h1>Home</h1>
+        <Navigation />
+        <Wrapper>
+            
+        </Wrapper>
     </Root>
 )
 
