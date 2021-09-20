@@ -1,18 +1,19 @@
 import Root from "components/Root"
-import Navigation from "components/Navigation"
-
-const Wrapper = ({ children }) => (
-    <div className="flex">
-        { children }
-    </div>
-)
+import NavigationHeader from "components/Navigation/Header"
 
 const Home = () => (
     <Root>
-        <Navigation />
-        <Wrapper>
-            
-        </Wrapper>
+        <NavigationHeader />
+        
+        <div className="flex">
+            <div>
+                <h1>Harvest Festival</h1>
+                <p></p>
+            </div>
+            <div>
+
+            </div>
+        </div>
     </Root>
 )
 

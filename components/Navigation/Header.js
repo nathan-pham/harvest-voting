@@ -1,14 +1,7 @@
+import Anchor from "./Anchor"
 import { LeafOutline } from "react-ionicons"
 
-const NavigationLink = ({ href, children }) => (
-    <a href={ href } className="group relative font-semibold text-xl">
-        { children }
-
-        <div className="bg-black w-full h-0.5 transition-opacity opacity-0 group-hover:opacity-100"></div>
-    </a>
-)
-
-const Navigation = () => (
+const Header = () => (
     <header className="p-4">
         <div className="border-2 border-black w-full flex items-center justify-between p-4">
             <a href="/" className="flex items-center">
@@ -20,12 +13,12 @@ const Navigation = () => (
             </a>
 
             <nav className="flex gap-6">
-                <NavigationLink href="/vote">Vote</NavigationLink>
-                <NavigationLink href="/news">News</NavigationLink>
-                <NavigationLink href="/about">Activities</NavigationLink>
+                <Anchor href="/vote">Vote</Anchor>
+                <Anchor href="/news">News</Anchor>
+                <Anchor href="/about">Activities</Anchor>
             </nav>
         </div>
     </header>
 )
 
-export default Navigation
+export default Header
