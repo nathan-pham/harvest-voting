@@ -16,10 +16,11 @@ const Canvas = ({ className }) => {
         renderer.setSize(container.offsetWidth, container.offsetHeight)
         container.appendChild(renderer.domElement)
 
+        scene.background = new THREE.Color(0xfffff7)
+        camera.position.z = 4
+
         const [ cubeMesh, animateCube ] = createSphere()
         scene.add(cubeMesh)
-
-        camera.position.z = 5
 
         const animate = () => {
             requestAnimationFrame(animate)
