@@ -1,18 +1,16 @@
 import * as THREE from "three"
+import gsap, { Expo } from "gsap"
 
 const fragmentShader = `
     varying float vNoise;
     varying vec2 vUv;
 
-    uniform sampler2D oceanTexture;
     uniform float time;
 
     void main() {
         vec3 color1 = vec3(0., 0., 0.);
         vec3 color2 = vec3(1., 1., 1.);
         vec3 colorFinal = mix(color1, color2, (vNoise + 1.) * 0.125);
-
-
         gl_FragColor = vec4(colorFinal, 1.);
     }
 `
@@ -96,13 +94,15 @@ const vertexShader = `
     varying vec2 vUv;
 
     uniform float time;
+    uniform vec2 mouse;
+    uniform float mouseState;
 
     void main() {
         vec3 newposition = position;
 
         float noise = cnoise(3. * vec3(position.x, position.y, position.z + (time / 5.)));
-        // float dist = distance(uv, vec2(0.5));
-        newposition += normal * noise * 0.5;
+        float dist = distance(uv, mouse);
+        newposition += normal * noise * (mouseState + 0.1);
 
         vNoise = noise;
         vUv = uv;
@@ -111,22 +111,57 @@ const vertexShader = `
     }
 `
 
-const createSphere = () => {
+const createSphere = (container, scene, camera) => {
     const geometry = new THREE.SphereBufferGeometry(2, 64, 64)
     const material = new THREE.ShaderMaterial({
-        uniforms: { time: { value: 0 } },
+        uniforms: { 
+            time: { value: 0 },
+            mouse: { value: new THREE.Vector2(0.5, 0.5) },
+            mouseState: { value: 0 }
+        },
         side: THREE.DoubleSide,
         fragmentShader,
         vertexShader
     })
 
-    let time = 0
-
     const mesh = new THREE.Mesh(geometry, material)
+
+    // mouse logic
+    const raycaster = new THREE.Raycaster()
+    const mouse = new THREE.Vector2()
+    let intersectors = []
+
+    let time = 0
     const animate = () => {
         time += 0.01
         material.uniforms.time.value = time
     }
+
+    container.addEventListener("mouseenter", () => {
+        gsap.to(material.uniforms.mouseState, { duration: 0.5, value: 1, ease: Expo.easeInOut })
+    })
+
+    container.addEventListener("mouseout", () => {
+        gsap.to(material.uniforms.mouseState, { duration: 0.5, value: 0, ease: Expo.easeInOut })
+    })
+
+    container.addEventListener("mousemove", e => {
+        const rect = container.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+    
+        mouse.x = (x / container.offsetWidth) * 2 - 1
+        mouse.y = -(y / container.offsetHeight) * 2 + 1
+
+        raycaster.setFromCamera(mouse, camera)
+        intersectors = raycaster.intersectObjects(scene.children)
+
+        if(intersectors.length > 0) {
+            material.uniforms.mouse.value = intersectors[0].uv
+        }
+    })
+
+
 
     return [ mesh, animate ]
 }

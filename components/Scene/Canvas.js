@@ -19,13 +19,12 @@ const Canvas = ({ className }) => {
         scene.background = new THREE.Color(0xfffff7)
         camera.position.z = 4
 
-        const [ cubeMesh, animateCube ] = createSphere()
-        scene.add(cubeMesh)
+        const [ sphereMesh, animateSphere ] = createSphere(container, scene, camera)
+        scene.add(sphereMesh)
 
         const animate = () => {
             requestAnimationFrame(animate)
-
-            animateCube()
+            animateSphere()
 
             renderer.render(scene, camera)
         }
