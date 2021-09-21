@@ -6,7 +6,6 @@ const Home = () => (
     <Root>
         <NavigationHeader />
         <Hero />
-
     </Root>
 )
 
