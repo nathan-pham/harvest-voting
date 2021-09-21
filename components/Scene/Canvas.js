@@ -1,18 +1,7 @@
 import { useEffect, useRef } from "react"
 import * as THREE from "three"
 
-const createCube = () => {
-    const geometry = new THREE.BoxGeometry(1, 1, 1)
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-
-    const mesh = new THREE.Mesh(geometry, material)
-    const animate = () => {
-        mesh.rotation.x += 0.01
-        mesh.rotation.y += 0.01
-    }   
-
-    return [ mesh, animate ]
-}
+import createSphere from "./create/createSphere"
 
 const Canvas = ({ className }) => {
     const mountRef = useRef(null)
@@ -27,7 +16,7 @@ const Canvas = ({ className }) => {
         renderer.setSize(container.offsetWidth, container.offsetHeight)
         container.appendChild(renderer.domElement)
 
-        const [ cubeMesh, animateCube ] = createCube()
+        const [ cubeMesh, animateCube ] = createSphere()
         scene.add(cubeMesh)
 
         camera.position.z = 5
