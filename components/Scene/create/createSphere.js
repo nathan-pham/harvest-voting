@@ -10,7 +10,7 @@ const fragmentShader = `
     void main() {
         vec3 color1 = vec3(0., 0., 0.);
         vec3 color2 = vec3(1., 1., 1.);
-        vec3 colorFinal = mix(color1, color2, (vNoise + 1.) * 0.125);
+        vec3 colorFinal = mix(color1, color2, (vNoise + 1.) * 0.15);
         gl_FragColor = vec4(colorFinal, 1.);
     }
 `
@@ -102,7 +102,7 @@ const vertexShader = `
 
         float noise = cnoise(3. * vec3(position.x, position.y, position.z + (time / 5.)));
         float dist = distance(uv, mouse);
-        newposition += normal * noise * (mouseState + 0.1);
+        newposition += normal * noise * (mouseState);
 
         vNoise = noise;
         vUv = uv;
@@ -112,12 +112,12 @@ const vertexShader = `
 `
 
 const createSphere = (container, scene, camera) => {
-    const geometry = new THREE.SphereBufferGeometry(2, 64, 64)
+    const geometry = new THREE.SphereBufferGeometry(1.5, 128, 128)
     const material = new THREE.ShaderMaterial({
         uniforms: { 
             time: { value: 0 },
             mouse: { value: new THREE.Vector2(0.5, 0.5) },
-            mouseState: { value: 0 }
+            mouseState: { value: 0.2 }
         },
         side: THREE.DoubleSide,
         fragmentShader,
@@ -134,15 +134,17 @@ const createSphere = (container, scene, camera) => {
     let time = 0
     const animate = () => {
         time += 0.01
+        mesh.rotation.x += 0.005
+        mesh.rotation.y += 0.005
         material.uniforms.time.value = time
     }
 
     container.addEventListener("mouseenter", () => {
-        gsap.to(material.uniforms.mouseState, { duration: 0.5, value: 1, ease: Expo.easeInOut })
+        gsap.to(material.uniforms.mouseState, { duration: 0.4, value: 1, ease: Expo.easeInOut })
     })
 
     container.addEventListener("mouseout", () => {
-        gsap.to(material.uniforms.mouseState, { duration: 0.5, value: 0, ease: Expo.easeInOut })
+        gsap.to(material.uniforms.mouseState, { duration: 0.4, value: 0.2, ease: Expo.easeInOut })
     })
 
     container.addEventListener("mousemove", e => {

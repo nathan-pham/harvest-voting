@@ -3,7 +3,7 @@ import * as THREE from "three"
 
 import createSphere from "./create/createSphere"
 
-const Canvas = ({ className }) => {
+const Canvas = (props) => {
     const mountRef = useRef(null)
 
     useEffect(() => {
@@ -35,7 +35,7 @@ const Canvas = ({ className }) => {
     }, [])
 
     return (
-        <div ref={ mountRef } className={ className }></div>
+        <div ref={ mountRef } { ...props }></div>
     )
 }
 

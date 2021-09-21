@@ -13,8 +13,7 @@ const Hero = () => (
             </div>
         </div>
 
-        <Canvas className="w-96 h-96 mt-16 mr-4" />
-        {/* <video className="invert mt-20 mr-16" src="/ball.mp4" autoPlay muted loop></video> */}
+        <Canvas className="mt-16 mr-16" style={{ width: "30rem", height: "30rem" }} />
     </div>
 )
 
