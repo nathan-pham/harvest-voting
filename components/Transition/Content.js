@@ -16,7 +16,7 @@ const Content = ({ children }) => {
     }, [])
 
     return (
-        <div ref={ animationRef } className="opacity-0">
+        <div ref={ animationRef } className="opacity-0" id="page-content">
             { children }
         </div>
     )

@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from "./Link"
 
 import Canvas from "./Scene/Canvas"
 import Button from "./Button"
