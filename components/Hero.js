@@ -2,7 +2,7 @@ import Canvas from "./Scene/Canvas"
 import Button from "./Button"
 
 const Hero = () => (
-    <div className="h-screen w-full flex items-center justify-end relative z-10 overflow-hidden" style={{ backgroundColor: "#fffff7" }}>
+    <div className="h-screen w-full flex items-center justify-end relative z-10 overflow-hidden">
         <div className="absolute bottom-4 left-4 bg-white border-2 border-black p-4 z-10">
             <span className="uppercase tracking-wider text-lg">Featured Event</span>
             <h1 className="text-4xl font-bold">Trunk or Treat</h1>

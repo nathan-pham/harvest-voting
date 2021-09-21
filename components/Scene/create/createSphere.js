@@ -10,7 +10,7 @@ const fragmentShader = `
     void main() {
         vec3 color1 = vec3(0., 0., 0.);
         vec3 color2 = vec3(1., 1., 1.);
-        vec3 colorFinal = mix(color1, color2, (vNoise + 1.) * 0.15);
+        vec3 colorFinal = mix(color1, color2, (vNoise + 1.) * 0.2);
         gl_FragColor = vec4(colorFinal, 1.);
     }
 `
@@ -100,9 +100,11 @@ const vertexShader = `
     void main() {
         vec3 newposition = position;
 
-        float noise = cnoise(3. * vec3(position.x, position.y, position.z + (time / 5.)));
+        float noise = cnoise(2. * vec3(position.x, position.y, position.z + (time / 5.)));
         float dist = distance(uv, mouse);
-        newposition += normal * noise * (mouseState);
+        newposition += normal * noise * mouseState;
+        
+        // spike only on mouse (1. - smoothstep(0.1, 0.2, dist));
 
         vNoise = noise;
         vUv = uv;
@@ -110,6 +112,8 @@ const vertexShader = `
         gl_Position = projectionMatrix * modelViewMatrix * vec4(newposition, 1.);
     }
 `
+
+const lerp = (a, b, t) => a + (b - a) * t
 
 const createSphere = (container, scene, camera) => {
     const geometry = new THREE.SphereBufferGeometry(1.5, 128, 128)
@@ -134,8 +138,8 @@ const createSphere = (container, scene, camera) => {
     let time = 0
     const animate = () => {
         time += 0.01
-        mesh.rotation.x += 0.005
-        mesh.rotation.y += 0.005
+        // mesh.rotation.x += 0.005
+        // mesh.rotation.y += 0.005
         material.uniforms.time.value = time
     }
 
@@ -152,8 +156,8 @@ const createSphere = (container, scene, camera) => {
         const x = e.clientX - rect.left
         const y = e.clientY - rect.top
     
-        mouse.x = (x / container.offsetWidth) * 2 - 1
-        mouse.y = -(y / container.offsetHeight) * 2 + 1
+        mouse.x = lerp(mouse.x, (x / container.offsetWidth) * 2 - 1, 0.1)
+        mouse.y = lerp(mouse.y, -(y / container.offsetHeight) * 2 + 1, 0.1)
 
         raycaster.setFromCamera(mouse, camera)
         intersectors = raycaster.intersectObjects(scene.children)
