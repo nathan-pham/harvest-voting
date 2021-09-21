@@ -1,6 +1,9 @@
 import { useEffect } from "react"
 import Head from "next/head"
 
+import PageTransition from "./Transition/Page"
+import ContentTransition from "./Transition/Content"
+
 const Root = ({ title, children }) => {
     useEffect(() => {
         document.body.style.background = "#fffff7"
@@ -12,7 +15,10 @@ const Root = ({ title, children }) => {
                 <title>Harvest Festival</title>
             </Head>
 
-            { children }
+            <PageTransition />
+            <ContentTransition>
+                { children }
+            </ContentTransition>
         </>
     )
 }

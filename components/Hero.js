@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import Canvas from "./Scene/Canvas"
 import Button from "./Button"
 
@@ -9,7 +11,9 @@ const Hero = () => (
             
             <div className="flex items-center justify-between mt-2 w-full">
                 <p className="text-xl font-serif">Hosted by Kiana Mushock-Buntin</p>
-                <Button className="ml-40" />
+                <Link href="/vote">
+                    <Button className="ml-40">Vote</Button>
+                </Link>
             </div>
         </div>
 
