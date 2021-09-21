@@ -1,19 +1,12 @@
 import Root from "components/Root"
+import Hero from "components/Hero"
 import NavigationHeader from "components/Navigation/Header"
 
 const Home = () => (
     <Root>
         <NavigationHeader />
-        
-        <div className="flex">
-            <div>
-                <h1>Harvest Festival</h1>
-                <p></p>
-            </div>
-            <div>
+        <Hero />
 
-            </div>
-        </div>
     </Root>
 )
 
