@@ -16,7 +16,7 @@ const Canvas = (props) => {
         renderer.setSize(container.offsetWidth, container.offsetHeight)
         container.appendChild(renderer.domElement)
 
-        scene.background = new THREE.Color(0xfffff7)
+        scene.background = new THREE.Color(0xffffe6)
         camera.position.z = 4
 
         const [ sphereMesh, animateSphere ] = createSphere(container, scene, camera)

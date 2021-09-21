@@ -6,7 +6,7 @@ import ContentTransition from "./Transition/Content"
 
 const Root = ({ title, children }) => {
     useEffect(() => {
-        document.body.style.background = "#fffff7"
+        document.body.style.background = "#ffffe6"
     }, [])
 
     return (
