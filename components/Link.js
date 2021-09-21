@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import gsap from "gsap"
 
-const Link = ({ children, href, ...props }) => {
+const Link = ({ children, href, real, ...props }) => {
     const router = useRouter()
 
     const click = (e) => {
@@ -17,9 +17,9 @@ const Link = ({ children, href, ...props }) => {
     }
 
     return (
-        <a href={ href } onClick={ click } { ...props }>
-            {children}
-        </a>
+        real 
+            ? <a href={ href } { ...props }>{children}</a>
+            : <a href={ href } onClick={ click } { ...props }>{children}</a>
     )
 }
 

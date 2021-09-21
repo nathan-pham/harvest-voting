@@ -9,15 +9,15 @@ const Header = () => (
             <Link href="/" className="flex items-center">
                 <div className="border-2 border-black flex items-center justify-center w-12 h-12">
                     <LeafOutline />
-                    </div>
+                </div>
 
-                <span className="ml-4 font-semibold text-2xl uppercase">Harvest Festival</span>
+                <span className="ml-4 font-semibold text-2xl uppercase hidden sm:inline-flex">Harvest Festival</span>
             </Link>
 
             <nav className="flex gap-4">
                 <Anchor href="/vote">Vote</Anchor>
                 <Anchor href="/news">News</Anchor>
-                <Anchor href="/about">Activities</Anchor>
+                <Anchor href="https://deloro.farm" real>About</Anchor>
             </nav>
         </div>
     </header>
