@@ -1,3 +1,4 @@
+import Canvas from "./Scene/Canvas"
 import Button from "./Button"
 
 const Hero = () => (
@@ -12,7 +13,8 @@ const Hero = () => (
             </div>
         </div>
 
-        <video className="invert mt-20 mr-16" src="/ball.mp4" autoPlay muted loop></video>
+        <Canvas className="w-80 h-80 mr-4" />
+        {/* <video className="invert mt-20 mr-16" src="/ball.mp4" autoPlay muted loop></video> */}
     </div>
 )
 
